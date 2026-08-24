@@ -3,4 +3,4 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/razorpay-payment-db
+    url: jdbc:postgresql://localhost:5431/razorpay-payment-db
