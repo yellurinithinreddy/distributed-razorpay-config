@@ -1,0 +1,13 @@
+server:
+  port: 9010
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/razorpay-merchant-db
+
+
+master:
+  secret-key: m9K3vL7xQ2pN8sR4tY6uA1bC5dE0fG7hJ2kL9nP3qWs=
+
+webhoook:
+  secret-encryption-key: jEbSy97ac+f1IDJCbVEMOZ4CJ2VzScYQljWrkxwyVWs
