@@ -1,15 +1,15 @@
 spring:
-  application:
-    name: razorpay
+  threads:
+    virtual:
+      enabled: true
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5431/razorpay-db}
-    username: ${DB_USER:nithin}
-    password: ${DB_PWD:password}
+    username: nithin
+    password: password
+    driver-class-name: org.postgresql.Driver
   data:
     redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
-      password: ${REDIS_PASSWORD:}
+      host: localhost
+      port: 6379
   jpa:
     hibernate:
       ddl-auto: update
@@ -18,76 +18,43 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   kafka:
-    listener:
-      ack-mode: manual
-    bootstrap-servers: ${KAFKA_BROKERS:localhost:29092}
+    bootstrap-servers: localhost:29092
     producer:
-      acks: all
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.sprin gframework.kafka.support.serializer.JsonSerializer
-      properties:
-        enable.idempotence: true
-        max.in.flight.requests.per.connection: 5
-        retries: 3
-        spring.json.add.type.headers: false
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
-      group-id: razorpay-monolith
+      group-id: razorpay-clone-group
       auto-offset-reset: earliest
-      enable-auto-commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "com.nithin.razorpay.*"
-        spring.json.use.type.headers: false
-        spring.json.value.default.type: java.util.LinkedHashMap
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
 
-master:
-  secret-key: m9K3vL7xQ2pN8sR4tY6uA1bC5dE0fG7hJ2kL9nP3qWs=
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
 
-payment:
-  simulator:
-    poll-interval-seconds: 5000
-    chaos-mode: FAILURE
-    method:
-      CARD:
-        min-delay-seconds: 2
-        max-delay-seconds: 6
-        success-rate: 90
-      UPI:
-        min-delay-seconds: 1
-        max-delay-seconds: 1
-        success-rate: 95
-      NET_BANKING:
-        min-delay-seconds: 4
-        max-delay-seconds: 10
-        success-rate: 80
+logging:
+  level:
+    org.apache.kafka.clients: WARN
+    org.apache.kafka.common: WARN
 
-settlement:
-  simulator:
-    poll-interval-seconds: 5000
-    settlement-chaos-mode: SUCCESS
-    success-rate: 80
 
-jwt:
-  secret-key: sdfkjghdskljhbfvkeshfdnzkljgfdskujlzjfdslbkjfes
 
-threads:
-  virtual:
-    enabled: true
 
 app:
-  rate-limit:
-    method: fixed
-    use-case:
-      api-key:
-        requests-per-minute: 200
   kafka:
     topics:
       payment: payment.events
       order: order.events
       refund: refund.events
       settlement: settlement.events
-  webhook:
-    delivery:
-      redis-key: "webhook-retry"
-      poll-batch-size: 100
