@@ -1,0 +1,40 @@
+server:
+  port: 8080
+app:
+  security:
+    public-routes:
+      - /v1/auth/**
+      - /webhook/**
+    ratelimit:
+      method: fixed
+      use-case:
+        api-key:
+          requests-per-minute: 200
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: merchant-service
+              uri: lb://merchant-service
+              predicates:
+                - Path=/v1/merchants/**, /v1/auth/**
+
+            - id: payment-service
+              uri: lb://payment-service
+              predicates:
+                - Path=/v1/payments/**,/v1/orders/**
+                
+            - id: operations-service
+              uri: lb://operations-service
+              predicates:
+                - Path=/webhook/**
+
+            - id: vault-service
+              uri: lb://vault-service
+              predicates: 
+                - Path=/v1/vault/**
+jwt:
+  secret-key: sdfkjghdskljhbfvkeshfdnzkljgfdskujlzjfdslbkjfes
