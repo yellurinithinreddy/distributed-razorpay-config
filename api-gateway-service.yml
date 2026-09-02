@@ -6,6 +6,7 @@ app:
     public-routes:
       - /v1/auth/**
       - /webhook/**
+      - /actuator/**
   ratelimit:
     method: fixed
     use-case:
