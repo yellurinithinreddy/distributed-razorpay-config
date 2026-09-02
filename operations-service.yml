@@ -44,5 +44,6 @@ app:
       
 settlement:
   simulator: 
+    poll-interval-seconds: 5000
     settlement-chaos-mode: success
     success-rate: 80
