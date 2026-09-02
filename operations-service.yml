@@ -41,3 +41,8 @@ app:
     delivery:
       redis-key: "webhook-retry"
       poll-batch-size: 100
+      
+settlement:
+  simulator: 
+    settlement-chaos-mode: success
+    success-rate: 80
