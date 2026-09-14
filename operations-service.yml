@@ -47,3 +47,12 @@ settlement:
     poll-interval-seconds: 5000
     settlement-chaos-mode: success
     success-rate: 80
+---
+spring:
+  config:
+    activate:
+      on-profile: k8s
+  datasource:
+    url: jdbc:postgresql://postgres.razorpay-core.svc.cluster.local:5432/razorpay-operations-db
+    username: operations_user
+    password: ${OPERATIONS_DB_PASSWORD}
