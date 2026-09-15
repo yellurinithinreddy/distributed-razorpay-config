@@ -21,7 +21,7 @@ spring:
   datasource:
     url: jdbc:postgresql://postgres.razorpay-core.svc.cluster.local:5432/razorpay-merchant-db
     username: merchant_user
-    password: ${MERCHANT_DB_PASSSWORD}
+    password: ${MERCHANT_DB_PASSWORD}
 
 jwt:
   secret-key: ${JWT_SECRET}
