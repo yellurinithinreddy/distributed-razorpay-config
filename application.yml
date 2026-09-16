@@ -110,7 +110,7 @@ eureka:
 management:
   zipkin:
     tracing:
-      endpoint: http://zipkin.razorpay-core.svc.cluster.local:9411/api/v2/spans
+      endpoint: http://zipkin:9411/api/v2/spans
 
 MERCHANT_SERVICE_URI: http://merchant-service
 PAYMENT_SERVICE_URI: http://payment-service
