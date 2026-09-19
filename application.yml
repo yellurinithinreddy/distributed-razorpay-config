@@ -6,7 +6,7 @@ spring:
     hikari:
       maximum-pool-size: 50
     username: nithin
-    password: Nithinreddy9491$
+    password: password
     driver-class-name: org.postgresql.Driver
   data:
     redis:
