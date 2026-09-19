@@ -2,9 +2,6 @@ spring:
   threads:
     virtual:
       enabled: true
-  datasource:
-    hikari:
-      maximum-pool-size: 10
     username: nithin
     password: password
     driver-class-name: org.postgresql.Driver
