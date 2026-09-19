@@ -4,7 +4,7 @@ spring:
       enabled: true
   datasource:
     hikari:
-      maximum-pool-size: 50
+      maximum-pool-size: 10
     username: nithin
     password: password
     driver-class-name: org.postgresql.Driver
@@ -91,6 +91,9 @@ spring:
     redis:
       host: redis.razorpay-core.svc.cluster.local
       port: 6379
+  datasource:
+    hikari:
+      maximum-pool-size: 50
   kafka:
     bootstrap-servers: kafka.razorpay-core.svc.cluster.local:9092
   cloud:
